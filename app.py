@@ -11,7 +11,7 @@ import datetime
 import streamlit as st
 
 # Load data
-df = pd.read_csv(r"job and salary .csv")
+df = pd.read_csv("job_and_salary.csv")
 
 # Title
 emoji = "📊"
