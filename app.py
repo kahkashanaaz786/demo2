@@ -16,7 +16,7 @@ df = pd.read_csv(r"job and salary.csv")
 # Title
 emoji = "📊"
 st.title(f"{emoji} Job and Salary Dashboard {emoji}")
-st.image('s.jpeg', caption='The more the Salary the happier we be', use_column_width=True)
+st.image('C:\Users\MOHAMMAD AFTAB\Desktop\job\s.jpeg', caption='The more the Salary the happier we be', use_column_width=True)
 
 # Sidebar Filters
 selected_year = st.sidebar.selectbox("Select Year", ["All"] + list(df['work_year'].unique()))
