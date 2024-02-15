@@ -11,7 +11,7 @@ import datetime
 import streamlit as st
 
 # Load data
-df = pd.read_csv(r"job and salary.csv")
+df = pd.read_csv("C:\\Users\\User 37\\Desktop\\job\\job and salary .csv")
 
 # Title
 emoji = "📊"
@@ -20,6 +20,7 @@ st.image('s.jfif', caption='The more the Salary the happier we be', use_column_w
 
 # Sidebar Filters
 selected_year = st.sidebar.selectbox("Select Year", ["All"] + list(df['work_year'].unique()))
+selected_job_category = st.sidebar.selectbox("Select Job Category", ['All'] + list(df['job_category'].unique()))
 selected_experience_level = st.sidebar.selectbox("Select Experience Level", ["All"] + list(df['experience_level'].unique()))
 
 # Filter data based on selected filters
@@ -118,14 +119,27 @@ with col2:
 emoji = "📉 "
 st.subheader(f"Salary by Employee Residence Plot {emoji}")
 
-fig_salary_by_residence = px.scatter_geo(df_filtered,
+
+    
+
+
+if selected_job_category != 'All':
+    new_df = df[df['job_category'] == selected_job_category]
+    fig_salary_by_residence = px.scatter_geo(new_df,
                                          locations='employee_residence',
                                          locationmode='country names',
                                          color='salary_in_usd',
                                          hover_name='employee_residence',
                                          title='Salary by Employee Residence')
-st.plotly_chart(fig_salary_by_residence)
-
+    st.plotly_chart(fig_salary_by_residence)
+else:
+    fig_salary_by_residence1 = px.scatter_geo(df_filtered,
+                                         locations='employee_residence',
+                                         locationmode='country names',
+                                         color='salary_in_usd',
+                                         hover_name='employee_residence',
+                                         title='Salary by Employee Residence')
+    st.plotly_chart(fig_salary_by_residence1)    
 # Experience Level pie chart
 emoji = "🤝"
 st.subheader(f"Experience Level Pie Chart {emoji}")
@@ -140,4 +154,3 @@ fig_experience_level = px.pie(values=df_experience_level.values,
 
 # Display the pie chart
 st.plotly_chart(fig_experience_level)
-
